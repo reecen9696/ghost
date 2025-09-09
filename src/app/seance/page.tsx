@@ -155,7 +155,9 @@ export default function SeancePage() {
                 {/* Center Text */}
                 <div className="text-center px-8 z-10 relative">
                   {!vote ? (
-                    <p className="text-h2 animate-fade-in">Launch a Telegram bot</p>
+                    <p className="text-h2 animate-fade-in">
+                      Launch a Telegram bot
+                    </p>
                   ) : (
                     <div className="flex items-center justify-center h-full">
                       <span className="text-h2 metallic-text-gradient uppercase animate-fade-in">

@@ -44,8 +44,8 @@ export default function Navbar() {
   return (
     <nav className=" text-white ">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-3 items-center h-16">
-          {/* Logo */}
+        <div className="relative flex items-center h-16">
+          {/* Left: Logo + Online Indicator (Desktop only) */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-3">
               <Image
@@ -57,8 +57,8 @@ export default function Navbar() {
               />
             </Link>
 
-            {/* Online Indicator */}
-            <div className="flex items-center space-x-2 ml-4">
+            {/* Online Indicator (Desktop only) */}
+            <div className="hidden md:flex items-center space-x-2 ml-4">
               <div className="relative">
                 <div
                   className="w-2 h-2 rounded-full animate-pulse"
@@ -78,8 +78,8 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Navigation Links - Center */}
-          <div className="hidden md:flex justify-center space-x-8">
+          {/* Center: Navigation Links (Desktop only) - Absolutely centered */}
+          <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 space-x-8">
             <Link
               href="/"
               className="text-body hover:metallic-text-gradient transition-colors"
@@ -112,15 +112,15 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Right Section - Contract Address, Twitter X, Connect Wallet */}
-          <div className="flex justify-end items-center space-x-3">
-            {/* Contract Address Pill */}
+          {/* Right: Desktop elements + Mobile menu button */}
+          <div className="flex items-center space-x-3 ml-auto">
+            {/* Contract Address Pill (Desktop only) */}
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <button
                     onClick={copyToClipboard}
-                    className="hidden sm:flex items-center space-x-2 bg-secondary hover:bg-secondary/80 text-button border border-border uppercase tracking-wide font-medium px-6 py-3 rounded-md transition-colors cursor-pointer"
+                    className="hidden md:flex items-center space-x-2 bg-secondary hover:bg-secondary/80 text-button border border-border uppercase tracking-wide font-medium px-6 py-3 rounded-md transition-colors cursor-pointer"
                   >
                     <span className="text-xs font-mono">
                       CA: {contractAddress.slice(0, 6)}...
@@ -135,13 +135,13 @@ export default function Navbar() {
               </Tooltip>
             </TooltipProvider>
 
-            {/* Twitter X Icon */}
+            {/* Twitter X Icon (Desktop only) */}
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <div
                     onClick={openTwitter}
-                    className="hidden sm:flex items-center justify-center w-10 h-10 rounded-md hover:bg-gray-800/50 transition-colors cursor-pointer"
+                    className="hidden md:flex items-center justify-center w-10 h-10 rounded-md hover:bg-gray-800/50 transition-colors cursor-pointer"
                   >
                     <Image
                       src="/x.svg"
@@ -158,8 +158,8 @@ export default function Navbar() {
               </Tooltip>
             </TooltipProvider>
 
-            {/* Connect Wallet Button */}
-            <Button className="bg-black hover:bg-black/80 text-button border border-border uppercase tracking-wide font-medium px-6 py-3">
+            {/* Connect Wallet Button (Desktop only) */}
+            <Button className="hidden md:flex bg-black hover:bg-black/80 text-button border border-border uppercase tracking-wide font-medium px-6 py-3">
               CONNECT WALLET
             </Button>
 
@@ -171,11 +171,7 @@ export default function Navbar() {
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-body hover:text-white"
               >
-                {isMenuOpen ? (
-                  <Menu className="h-6 w-6 rotate-90" />
-                ) : (
-                  <Menu className="h-6 w-6" />
-                )}
+                <Menu className="h-6 w-6" />
               </Button>
             </div>
           </div>
@@ -183,8 +179,15 @@ export default function Navbar() {
 
         {/* Mobile Navigation Menu */}
         {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-gray-800">
+          <div className="md:hidden fixed inset-0 top-16 bg-black z-50">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {/* Mobile Connect Wallet */}
+              <div className="px-3 py-2">
+                <Button className="w-full bg-black hover:bg-black/80 text-button border border-border uppercase tracking-wide font-medium px-6 py-3">
+                  CONNECT WALLET
+                </Button>
+              </div>
+
               {/* Mobile Contract Address */}
               <div className="px-3 py-2">
                 <button
